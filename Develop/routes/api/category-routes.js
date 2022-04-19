@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
-// The `/api/categories` endpoint
-
+// The `/api/categories` endpoint, allows to retrieve JSON for all categories
 router.get('/', (req, res) => {
   
     Category.findAll({
@@ -30,7 +29,7 @@ router.get('/', (req, res) => {
       res.status(500).json(err);
     });
 });
-
+// Retrieves JSON for ONE category by ID
 router.get('/:id', (req, res) => {
     Category.findOne({
       where: {
@@ -60,7 +59,7 @@ router.get('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
-
+// Allows user to create new categories in JSON format
 router.post('/', (req, res) => {
     Category.create({
       category_name: req.body.category_name,
@@ -72,7 +71,7 @@ router.post('/', (req, res) => {
       res.status(500).json(err);
     });
 });
-
+// Allows user to change categories by ID using JSON
 router.put('/:id', (req, res) => {
     Category.update(req.body, {
       id: req.body.id
@@ -89,7 +88,7 @@ router.put('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
-
+// Deletes a category JSON data
 router.delete('/:id', (req, res) => {
     Category.destroy({
       where: {

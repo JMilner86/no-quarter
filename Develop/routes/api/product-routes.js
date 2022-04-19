@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
-// The `/api/products` endpoint
 
 // gets all products
 router.get('/', (req, res) => {
@@ -141,7 +140,7 @@ router.put('/:id', (req, res) => {
       res.status(400).json(err);
     });
 });
-
+// Deletes a product 
 router.delete('/:id', (req, res) => {
     Product.destroy({
       where: {
