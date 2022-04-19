@@ -16,8 +16,10 @@
 
 
 
+![week-13-challeng3](https://user-images.githubusercontent.com/95893374/163896262-7bb0d9e2-c4ff-4873-92c3-d094fae9bb37.png)
 
 
 
 * Heroku URL: https://thawing-ravine-23649.herokuapp.com/
-* Deployed URL on GitHub: 
+* GitHub URL: https://github.com/JMilner86/no-quarter
+* Google drive Video: https://drive.google.com/file/d/1YcqrVXb_yZv5z4X-NplivbWXa38wh7al/view
