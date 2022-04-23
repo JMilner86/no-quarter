@@ -69,36 +69,14 @@ router.post('/', (req, res) => {
     });
 });
 // Allows user to change categories by ID using JSON
-// router.put('/:id', (req, res) => {
-//     Category.update(req.body, {
-//       where: 
-//       {
-//         id: req.body.id,
-//         category_name: req.body.category_name
-//       },
-//       attributes: [
-//         'id',
-//         'category_name'
-//       ]
-//     },
-//     )
-//     .then(
-//       dbCategoryData => res.json(dbCategoryData)
-//     ).catch(err=> {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
-
 router.put('/:id', (req, res) => {
-  // update product data
+  // update category name
   Category.update(req.body, {
     where: {
       id: req.params.id,
     },
   })
     .then((category) => {
-      // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { category_id: req.params.id } });
     })
     .then((updatedCategoryTags) => res.json(updatedCategoryTags))
