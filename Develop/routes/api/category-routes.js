@@ -37,12 +37,9 @@ router.get('/:id', (req, res) => {
       },
       attributes: [
         'id',
-        'product_name',
-        'price,',
-        'stock',
-        'category_id'
+        'category_name'
       ],
-      include: [{
+      includeAs: [{
         model: Product,
         attributes: [
           'id',
@@ -72,20 +69,42 @@ router.post('/', (req, res) => {
     });
 });
 // Allows user to change categories by ID using JSON
+// router.put('/:id', (req, res) => {
+//     Category.update(req.body, {
+//       where: 
+//       {
+//         id: req.body.id,
+//         category_name: req.body.category_name
+//       },
+//       attributes: [
+//         'id',
+//         'category_name'
+//       ]
+//     },
+//     )
+//     .then(
+//       dbCategoryData => res.json(dbCategoryData)
+//     ).catch(err=> {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
+
 router.put('/:id', (req, res) => {
-    Category.update(req.body, {
-      id: req.body.id
+  // update product data
+  Category.update(req.body, {
+    where: {
+      id: req.params.id,
     },
-    {
-      where:{
-        id: req.params.id
-      }
+  })
+    .then((category) => {
+      // find all associated tags from ProductTag
+      return ProductTag.findAll({ where: { category_id: req.params.id } });
     })
-    .then(
-      dbCategoryData => res.json(dbCategoryData)
-    ).catch(err=> {
-      console.log(err);
-      res.status(500).json(err);
+    .then((updatedCategoryTags) => res.json(updatedCategoryTags))
+    .catch((err) => {
+      // console.log(err);
+      res.status(400).json(err);
     });
 });
 // Deletes a category JSON data
